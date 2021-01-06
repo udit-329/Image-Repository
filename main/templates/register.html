@@ -1,0 +1,23 @@
+{% extends "header.html" %}
+
+{% block content %}  
+<style>
+  .btn{
+    background-color: #96bf48;
+    
+  }
+  .btn:hover{
+    background-color: #70942e;
+  }
+</style>
+
+
+<form method="post">
+  {% csrf_token %}
+  {{form.as_p}}
+  <br><br>
+  <button class="btn" type="submit">Register</button>
+</form>
+<br> 
+<a href="/login"><strong>Login</strong></a> if you already have an account.
+{% endblock %}  

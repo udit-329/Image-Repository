@@ -1,0 +1,59 @@
+{% extends "header.html" %}
+
+{% block content %}  
+<style>
+    .delete-button{
+        background: none;
+        border: none;
+        font-weight: inherit;
+        color: #cc3b1b;
+        transition: color .28s ease, background-color .28s ease;
+        padding-left: 0;
+    }
+    .delete-button:hover{
+        color: #fc2d00;
+    }
+
+    .delete-button:focus{
+        
+        background: none !important;
+    }
+</style>
+
+<form action='upload_private' method="POST" enctype="multipart/form-data">
+
+    {% csrf_token %}
+    <input class="btn waves-effect waves-light" style="background-color: #009933;" type="file" accept=".jpg, .jpeg, .jpe, .jif, .png, .gif, .webp, .tiff, .tif" name="image">
+    <button class="btn waves-effect waves-light" style="background-color: #009933;" type="submit" name="upload file">submit</button>
+
+</form>
+
+<div class="row">
+    {% for im in images %}
+    <div class="col s6 m4 l3">
+        <div class="card small">
+        <div class="card-image">
+            <img src="{{im.picture.url}}">
+            <span class="card-title"></span>
+        </div>
+        <div class="card-content">
+            <p>{{im.name}}</p>
+        </div>
+        <div class="card-action">
+            <a href="{{im.picture.url}}">Full size</a>
+        </div>
+        <div class="card-action">
+            <a href="{{im.picture.url}}">Full size</a>
+            
+            <form method="POST" action="{% url 'main:image_del' im.pk %}">
+                {% csrf_token %}
+                {% if im.owner|stringformat:"s" == user.username or im.owner|stringformat:"s" == "None" %}
+                <button class="delete-button" type="submit">DELETE</button>
+                {% endif %}
+              </form>
+        </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+{% endblock %}  

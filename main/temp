@@ -1,0 +1,16 @@
+<script>
+        var checkboxes = $("input[type='checkbox']"),
+        submitButt = $("input[type='submit']");
+        checkboxes.click(function() {
+    submitButt.attr("disabled", !checkboxes.is(":checked"));
+});
+    </script>
+
+    <label>
+                    <input type="checkbox" class="filled-in" id="{{im.picture.url}}"/>
+                    <span>Delete</span>
+                </label>
+
+                <div>
+        <input type="submit" value="Do thing" disabled>
+    </div>
