@@ -9,7 +9,7 @@ from django.core.validators import validate_image_file_extension
 from django.core.validators import FileExtensionValidator
 from django.views.generic.edit import DeleteView
 from django.urls import reverse_lazy
-
+from django.db.models import Q
 
 # Create your views here.
 def index(request):
@@ -58,10 +58,14 @@ def upload_image(request):
     check_validation_error(request, new_image)
     
     return redirect("main:index")
+
 def search(request):
-    data = request.POST.get("search")
-    print(data)
-    return redirect("main:index")
+    
+    search = request.POST.get("search")
+    
+    images = image.objects.filter(Q(name__icontains=search) | Q(owner__username__icontains=search))
+    
+    return render(request=request, template_name="index.html", context={'images': images, 'line': search})
 
 def upload_image_private(request):
     pic = request.FILES['image']

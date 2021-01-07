@@ -30,16 +30,18 @@
         </form>
     </div>
 </div>
-<form action='search' method='POST'>
+<form class="form-inline my-2 my-lg-0" action='search' method='POST'>
+
     {% csrf_token %}
-   
-    <div class="input-field" name="search">
-      <input id="search"  type="search" required>
-      <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-      
-    </div>
-    <button class="btn" type="submit" style="background-color: #009933;" name="search">search</button>
+    <input class="form-control" type="search" name="search" placeholder="search">
+    <button class="btn" type="submit" style="background-color: #009933;">search</button>
   </form>
+  {% if line %}
+  <p>Search results for: <i>{{line}}</i></p>
+  {% else %}
+</br>
+  {% endif %}
+
 <div class="divider"></div>
 <div class="row">
     
