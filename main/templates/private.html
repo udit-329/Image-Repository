@@ -45,8 +45,9 @@
         <div class="card-action">
             <a href="{{im.picture.url}}">Full size</a>
             
-            <form method="POST" action="{% url 'main:image_del' im.pk %}">
+            <form method="POST" action="{% url 'main:image_delete' im.pk %}">
                 {% csrf_token %}
+                <input type="text" name="template" value="private" hidden>
                 {% if im.owner|stringformat:"s" == user.username or im.owner|stringformat:"s" == "None" %}
                 <button class="delete-button" type="submit">DELETE</button>
                 {% endif %}

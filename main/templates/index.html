@@ -38,6 +38,13 @@
   </form>
   {% if line %}
   <p>Search results for: <i>{{line}}</i></p>
+  <form action="clear" method="POST">
+    {% csrf_token %}
+    <input type="text" name="template" value="index" hidden>
+    <button class="btn" type="submit" style="background-color: #009933;">Clear Search Results</button>
+  </form>
+  
+
   {% else %}
 </br>
   {% endif %}
@@ -63,8 +70,9 @@
             <div class="card-action">
                 <a href="{{im.picture.url}}">Full size</a>
                 
-                <form method="POST" action="{% url 'main:image_del' im.pk %}">
+                <form method="POST" action="{% url 'main:image_delete' im.pk %}">
                     {% csrf_token %}
+                    <input type="text" name="template" value="index" hidden>
                     {% if im.owner|stringformat:"s" == user.username or im.owner|stringformat:"s" == "None" %}
                     <button class="delete-button" type="submit">DELETE</button>
                     {% endif %}

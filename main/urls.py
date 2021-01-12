@@ -15,6 +15,8 @@ urlpatterns = [
     path('logout', views.logout_account, name="logout"),
     path('login', views.login_account, name="login"),
     path('private', views.private, name="private"),
-    path('remove/<int:pk>', views.delete_image, name='image_search', views.search, name='search'),
+    path('remove/<int:pk>', views.delete_image, name='image_delete'),
+    path('search', views.search, name='search'),
+    path('clear', views.clear, name='clear'),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

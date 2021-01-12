@@ -105,5 +105,12 @@ def login_account(request):
 def delete_image(request, pk):
     if request.method == 'POST':
         im = image.objects.get(pk=pk)
+        #print(request.path)
         im.delete()
-    return redirect('main:index')
+        template_name = request.POST.get('template')
+        #print(template_name)
+    return redirect("main:" + template_name)
+
+def clear(request):
+    template_name = request.POST.get('template')
+    return redirect("main:" + template_name)
