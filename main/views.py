@@ -120,3 +120,17 @@ def delete_image(request, pk):
 def clear(request):
     template_name = request.POST.get('template')
     return redirect("main:" + template_name)
+
+def search_by_image(request):
+    pic = request.FILES['image']
+    name_pic = pic.name
+    template_name = request.POST.get('template')
+    if template_name == "index":
+        new_image = image(picture=pic, name=name_pic, search = True)
+    elif template_name == "private":
+        user = request.user
+        new_image = image(picture=pic, name=name_pic,  search = True, owner=user, private=True)
+
+    check_validation_error(request, new_image)
+
+    return redirect("main:index")
