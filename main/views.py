@@ -62,10 +62,16 @@ def upload_image(request):
 def search(request):
     
     search = request.POST.get("search")
-    
-    images = image.objects.filter(Q(name__icontains=search) | Q(owner__username__icontains=search))
-    
-    return render(request=request, template_name="index.html", context={'images': images, 'line': search})
+    template = request.POST.get('template')
+    if (template == "index"):
+        images = image.objects.filter(Q(name__icontains=search) | Q(owner__username__icontains=search), private=False)
+    elif (template == "private"):
+        print("private")
+        images = image.objects.filter(Q(name__icontains=search) | Q(owner__username__icontains=search), private=True, owner=request.user)
+        
+
+    template_name = template + ".html"
+    return render(request=request, template_name=template_name, context={'images': images, 'line': search})
 
 def upload_image_private(request):
     pic = request.FILES['image']
