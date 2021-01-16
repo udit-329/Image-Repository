@@ -93,7 +93,7 @@ DATABASES = {
     'ENGINE': 'django.db.backends.postgresql',
 
 }
-DATABASES['default'].update(db_from_env)
+#DATABASES['default'].update(db_from_env)
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
