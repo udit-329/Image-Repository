@@ -141,4 +141,4 @@ def search_by_image(request):
 
     return redirect("main:index")
 
-    #f
+    
