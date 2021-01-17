@@ -10,7 +10,7 @@ from django.core.validators import FileExtensionValidator
 from django.views.generic.edit import DeleteView
 from django.urls import reverse_lazy
 from django.db.models import Q
-from ..index import create_database
+from index import create_database
 
 # Create your views here.
 #public repo, home page
@@ -154,7 +154,7 @@ def search_by_image(request):
     try:
         create_database()
         print("success")
-    else:
+    except:
         print("error cannot create database")
     
 
