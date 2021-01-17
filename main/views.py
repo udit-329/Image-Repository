@@ -12,7 +12,6 @@ from django.urls import reverse_lazy
 from django.db.models import Q
 from .validators import check_validation_error
 
-# Create your views here.
 #public repo, home page
 def index(request):
     images = image.objects.filter(private=False)
