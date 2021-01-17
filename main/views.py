@@ -10,7 +10,7 @@ from django.core.validators import FileExtensionValidator
 from django.views.generic.edit import DeleteView
 from django.urls import reverse_lazy
 from django.db.models import Q
-from validators import check_validation_error
+from .validators import check_validation_error
 
 # Create your views here.
 #public repo, home page
