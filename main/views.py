@@ -11,10 +11,6 @@ from django.views.generic.edit import DeleteView
 from django.urls import reverse_lazy
 from django.db.models import Q
 
-import sys
-sys.path.append("..")
-import index
-
 # Create your views here.
 #public repo, home page
 def index(request):
