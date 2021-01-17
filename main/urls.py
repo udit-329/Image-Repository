@@ -18,6 +18,5 @@ urlpatterns = [
     path('remove/<int:pk>', views.delete_image, name='image_delete'),
     path('search', views.search, name='search'),
     path('clear', views.clear, name='clear'),
-    path('search_by_image', views.search_by_image, name='search_by_image'),
-    
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
