@@ -10,7 +10,10 @@ from django.core.validators import FileExtensionValidator
 from django.views.generic.edit import DeleteView
 from django.urls import reverse_lazy
 from django.db.models import Q
-from index import create_database
+
+import sys
+sys.path.append("..")
+import index
 
 # Create your views here.
 #public repo, home page
