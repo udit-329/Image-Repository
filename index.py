@@ -7,8 +7,8 @@ import cv2
 from image_repository import settings
 
 
-def create_database(database, image_folder):
-
+def create_database():
+	database = 'image_features.csv'
 	#init color desc
 	cd = colour_descriptors((8, 12, 3))
 
@@ -33,4 +33,4 @@ def create_database(database, image_folder):
 
 if __name__ == "__main__":
 	print("running...")
-	create_database("index1.csv", "test")
+	create_database()
