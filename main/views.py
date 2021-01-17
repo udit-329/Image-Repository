@@ -10,6 +10,7 @@ from django.core.validators import FileExtensionValidator
 from django.views.generic.edit import DeleteView
 from django.urls import reverse_lazy
 from django.db.models import Q
+from validators import check_validation_error
 
 # Create your views here.
 #public repo, home page
@@ -65,16 +66,7 @@ def logout_account(request):
     logout(request)
     return redirect("main:index")
 
-def check_validation_error(request, new_image):
-    try:
-        new_image.full_clean()
-    except ValidationError as e:
-        picture_error = e.message_dict.get('picture')
-        for msg in picture_error:
-            messages.error(request, f"{msg}")
-    else:
-        new_image.save()
-
+#upload images to main repo
 def upload_image(request):
     pic = request.FILES['image']
     name_pic = pic.name
@@ -89,20 +81,7 @@ def upload_image(request):
     
     return redirect("main:index")
 
-def search(request):
-    
-    search = request.POST.get("search")
-    template = request.POST.get('template')
-    if (template == "index"):
-        images = image.objects.filter(Q(name__icontains=search) | Q(owner__username__icontains=search), private=False)
-    elif (template == "private"):
-        print("private")
-        images = image.objects.filter(Q(name__icontains=search) | Q(owner__username__icontains=search), private=True, owner=request.user)
-        
-
-    template_name = template + ".html"
-    return render(request=request, template_name=template_name, context={'images': images, 'line': search})
-
+#upload images to private repo
 def upload_image_private(request):
     pic = request.FILES['image']
     name_pic = pic.name
@@ -115,19 +94,29 @@ def upload_image_private(request):
 
     return redirect("main:private")
 
+#Search through images
+def search(request):
+    
+    search = request.POST.get("search")
+    template = request.POST.get('template')
+    if (template == "index"):
+        images = image.objects.filter(Q(name__icontains=search) | Q(owner__username__icontains=search), private=False)
+    elif (template == "private"):
+        images = image.objects.filter(Q(name__icontains=search) | Q(owner__username__icontains=search), private=True, owner=request.user)
+        
+    template_name = template + ".html"
+    return render(request=request, template_name=template_name, context={'images': images, 'line': search})
 
-
-
-
+#Delete images
 def delete_image(request, pk):
     if request.method == 'POST':
         im = image.objects.get(pk=pk)
-        #print(request.path)
         im.delete()
         template_name = request.POST.get('template')
-        #print(template_name)
+        
     return redirect("main:" + template_name)
 
+#Clear search button
 def clear(request):
     template_name = request.POST.get('template')
     return redirect("main:" + template_name)
