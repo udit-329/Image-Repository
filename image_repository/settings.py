@@ -29,7 +29,7 @@ SECRET_KEY = '*_vd+*!ve%m((8p+zgq$hr2tgy*+9a7m_a^3^j)m2i=4p)+8n$'
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
 
-ALLOWED_HOSTS = ['https://image-box.herokuapp.com/']
+ALLOWED_HOSTS = ["image-box.herokuapp.com"]
 
 
 # Application definition
