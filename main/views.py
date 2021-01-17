@@ -132,32 +132,5 @@ def clear(request):
     template_name = request.POST.get('template')
     return redirect("main:" + template_name)
 
-def search_by_image(request):
-    pic = request.FILES['image']
-    name_pic = pic.name
-    template_name = request.POST.get('template')
-    image_url = ''
-    if template_name == "index":
-        new_image = image(picture=pic, name=name_pic, search = True)
-        image_url = new_image.picture.url
-    elif template_name == "private":
-        user = request.user
-        new_image = image(picture=pic, name=name_pic,  search = True, owner=user, private=True)
-        image_url = new_image.picture.url
-        
-    check_validation_error(request, new_image)
-
-    
-    print(image_url)
-
-    try:
-        create_database()
-        print("success")
-    except:
-        print("error cannot create database")
-    
-
-
-    return redirect("main:index")
 
     

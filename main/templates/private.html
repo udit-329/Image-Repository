@@ -23,6 +23,7 @@
 <form action='upload_private' method="POST" enctype="multipart/form-data">
 
     {% csrf_token %}
+    <h6>Upload images to the repository here.</h6></br>
     <input class="btn waves-effect waves-light" style="background-color: #009933;" type="file" accept=".jpg, .jpeg, .jpe, .jif, .png, .gif, .webp, .tiff, .tif" name="image">
     <button class="btn waves-effect waves-light" style="background-color: #009933;" type="submit" name="upload file">submit</button>
 
