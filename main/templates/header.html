@@ -1,48 +1,54 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Image Repository</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-        
-    </head>
-    <body>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>  
-        <style>
-            .nav-wrapper{
-                background-color: #96bf48;
-            }
-        </style>
-        
-        <nav>
-            <div class="nav-wrapper">
-              <a href="/" class="brand-logo"> Image Repository</a>
-              <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="/">Home</a></li>
-                
-                {% if user.is_authenticated %}
-                <li><a href="/private">{{user.username}}</a></li>
-                <li><a href="/logout">Logout</a></li>
-                {% else %}
-                <li><a href="/register">Register</a></li>
-                <li><a href="/login">Login</a></li>
-                {% endif %}
-                
-              </ul>
-            </div>
-          </nav>
-          
-        {% if messages %}
-          {% for message in messages %}
-            <script>M.toast({html: "{{message}}", classes: 'blue', displayLength:2500});</script>
-          {% endfor %}
-        {% endif %}
-        <div class="container">
-          
-          <br>
-          {% block content %}  
-          {% endblock %}  
+  <head>
+      <title>Image Repository</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  </head>
+
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>  
+
+      <nav>
+        <div class="nav-wrapper" style="background-color: #96bf48;">
+          <a href="/" class="brand-logo"> Image Repository</a>
+            
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+            <li>
+              <a href="/">Home</a>
+            </li>
+            
+            {% if user.is_authenticated %}
+            <li>
+              <a href="/private">{{user.username}}</a>
+            </li>
+            <li>
+              <a href="/logout">Logout</a>
+            </li>
+            {% else %}
+            <li>
+              <a href="/register">Register</a>
+            </li>
+            <li>
+              <a href="/login">Login</a>
+            </li>
+            {% endif %}
+            
+          </ul>
         </div>
+      </nav>
         
-    </body>
-    
+      {% if messages %}
+        {% for message in messages %}
+          <script>M.toast({html: "{{message}}", classes: 'blue', displayLength:2500});</script>
+        {% endfor %}
+      {% endif %}
+
+      <div class="container">
+        <br>
+        {% block content %}  
+        {% endblock %}  
+      </div>
+      
+  </body>
 </html>
