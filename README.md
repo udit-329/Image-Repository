@@ -1,8 +1,8 @@
 # Image-Repository
- This was made for the Summer 2021 - Shopify Developer Intern Challenge.
+ This is my entry made for the Summer 2021 - Shopify Developer Intern Challenge.
  
 ## Technologies Used
- This web app was built using the django framework and hosted on Heroku.
+ This web app was built using the django framework and hosted on Heroku. The page is designed with HTML and Materialize CSS. A postgreSQL database is used to store all information.
  
 ## Features
 - Users can upload and save their images to the repository. They can also search through old images.
