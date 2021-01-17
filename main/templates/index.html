@@ -40,39 +40,45 @@
             
         </form>
     </div>
-    
 </div>
+
 <div class="divider"></div>
+
 <div class="row">
-<form class="form-inline my-2 my-lg-0" action='search' method='POST'>
+    <form class="form-inline my-2 my-lg-0" action='search' method='POST'>
 
-    {% csrf_token %}
-    <input type="text" name="template" value="index" hidden>
-    <input class="form-control" type="search" name="search" placeholder="search" required>
-    <button class="btn" type="submit" style="background-color: #009933;">search</button>
-  </form>
-  {% if line %}
-  <p>Search results for: <i>{{line}}</i></p>
-  <form action="clear" method="POST">
-    {% csrf_token %}
-    <input type="text" name="template" value="index" hidden>
-    <button class="btn" type="submit" style="background-color: #009933;">Clear Search Results</button>
-  </form>
+        {% csrf_token %}
+        <input type="text" name="template" value="index" hidden>
+        <input class="form-control" type="search" name="search" placeholder="search" required>
+        <button class="btn" type="submit" style="background-color: #009933;">search</button>
+
+    </form>
+
+    {% if line %}
+
+        <p>Search results for: <i>{{line}}</i></p>
+
+        <form action="clear" method="POST">
+            {% csrf_token %}
+            <input type="text" name="template" value="index" hidden>
+            <button class="btn" type="submit" style="background-color: #009933;">Clear Search Results</button>
+        </form>
   
+    {% else %}
 
-  {% else %}
-</br>
-  {% endif %}
+        </br>
+
+    {% endif %}
  
-    
     {% for im in images %}
         
         <div class="col s6 m4 l3">
             <div class="card small">
-            <div class="card-image">
-                <img src="{{im.picture.url}}">
-                <span class="card-title">{{im.name}}</span>
-            </div>
+                <div class="card-image">
+                    <img src="{{im.picture.url}}">
+                    <span class="card-title">{{im.name}}</span>
+                </div>
+
             <div class="card-content">
                 {% if im.owner|stringformat:"s" == "None" %}
                     <p>Uploaded anonymously.</br></br></p>
@@ -80,6 +86,7 @@
                     <p>Uploaded by {{im.owner}}.</br></br></p>
                 {% endif %}
             </div>
+
             <div class="card-action">
                 <a href="{{im.picture.url}}">Full size</a>
                 
@@ -90,13 +97,13 @@
                     <button class="delete-button" type="submit">DELETE</button>
                     {% endif %}
                   </form>
-            </div>
-            
+
             </div>
         </div>
-    
-        {% endfor %}
-    
-   
     </div>
+    
+    {% endfor %}
+
+</div>
+
 {% endblock %}  

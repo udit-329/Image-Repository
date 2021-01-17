@@ -20,65 +20,77 @@
     }
 </style>
 
-<form action='upload_private' method="POST" enctype="multipart/form-data">
+<div class = "row">
+    <div class="col s6 m6 l6">
+        <form action='upload_private' method="POST" enctype="multipart/form-data">
 
-    {% csrf_token %}
-    <h6>Upload images to the repository here.</h6></br>
-    <input class="btn waves-effect waves-light" style="background-color: #009933;" type="file" accept=".jpg, .jpeg, .jpe, .jif, .png, .gif, .webp, .tiff, .tif" name="image">
-    <button class="btn waves-effect waves-light" style="background-color: #009933;" type="submit" name="upload file">submit</button>
-
-</form>
-<div class="divider"></div>
-<div class="row">
-<form class="form-inline my-2 my-lg-0" action='search' method='POST'>
-
-    {% csrf_token %}
-    <input type="text" name="template" value="private" hidden>
-    <input class="form-control" type="search" name="search" placeholder="search" required>
-    <button class="btn" type="submit" style="background-color: #009933;">search</button>
-  </form>
-  {% if line %}
-  <p>Search results for: <i>{{line}}</i></p>
-  <form action="clear" method="POST">
-    {% csrf_token %}
-    <input type="text" name="template" value="private" hidden>
-    <button class="btn" type="submit" style="background-color: #009933;">Clear Search Results</button>
-  </form>
-  
-
-  {% else %}
-</br>
-  {% endif %}
-
-  
-
-<div class="row">
-    {% for im in images %}
-    <div class="col s6 m4 l3">
-        <div class="card small">
-        <div class="card-image">
-            <img src="{{im.picture.url}}">
-            <span class="card-title"></span>
-        </div>
-        <div class="card-content">
-            <p>{{im.name}}</p>
-        </div>
-        <div class="card-action">
-            <a href="{{im.picture.url}}">Full size</a>
-        </div>
-        <div class="card-action">
-            <a href="{{im.picture.url}}">Full size</a>
+            {% csrf_token %}
+            <h6>Upload images to the repository here.</h6></br>
+            <input class="btn waves-effect waves-light" style="background-color: #009933;" type="file" accept=".jpg, .jpeg, .jpe, .jif, .png, .gif, .webp, .tiff, .tif" name="image">
+            <button class="btn waves-effect waves-light" style="background-color: #009933;" type="submit" name="upload file">submit</button>
             
-            <form method="POST" action="{% url 'main:image_delete' im.pk %}">
-                {% csrf_token %}
-                <input type="text" name="template" value="private" hidden>
-                {% if im.owner|stringformat:"s" == user.username or im.owner|stringformat:"s" == "None" %}
-                <button class="delete-button" type="submit">DELETE</button>
-                {% endif %}
-              </form>
-        </div>
+        </form>
+    </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="row">
+    <form class="form-inline my-2 my-lg-0" action='search' method='POST'>
+
+        {% csrf_token %}
+        <input type="text" name="template" value="private" hidden>
+        <input class="form-control" type="search" name="search" placeholder="search" required>
+        <button class="btn" type="submit" style="background-color: #009933;">search</button>
+
+    </form>
+
+    {% if line %}
+
+        <p>Search results for: <i>{{line}}</i></p>
+
+        <form action="clear" method="POST">
+            {% csrf_token %}
+            <input type="text" name="template" value="private" hidden>
+            <button class="btn" type="submit" style="background-color: #009933;">Clear Search Results</button>
+        </form>
+  
+    {% else %}
+
+        </br>
+
+    {% endif %}
+
+    {% for im in images %}
+
+        <div class="col s6 m4 l3">
+            <div class="card small">
+                <div class="card-image">
+                    <img src="{{im.picture.url}}">
+                    <span class="card-title"></span>
+                </div>
+
+            <div class="card-content">
+                <p>{{im.name}}</p>
+            </div>
+
+            <div class="card-action">
+                <a href="{{im.picture.url}}">Full size</a>
+                
+                <form method="POST" action="{% url 'main:image_delete' im.pk %}">
+                    {% csrf_token %}
+                    <input type="text" name="template" value="private" hidden>
+                    {% if im.owner|stringformat:"s" == user.username or im.owner|stringformat:"s" == "None" %}
+                    <button class="delete-button" type="submit">DELETE</button>
+                    {% endif %}
+                </form>
+
+            </div>
         </div>
     </div>
+
     {% endfor %}
-    </div>
+
+</div>
+
 {% endblock %}  
