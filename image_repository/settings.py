@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'image_repository.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-db_from_env = dj_database_url.config(conn_max_age=600)
+#db_from_env = dj_database_url.config(conn_max_age=600)
 
 
 DATABASES = {
@@ -95,7 +95,7 @@ DATABASES = {
     'USER' : 'postgresql',
     }
 }'''
-DATABASES['default'].update(db_from_env)
+#DATABASES['default'].update(db_from_env)
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
