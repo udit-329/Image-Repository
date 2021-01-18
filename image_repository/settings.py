@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'image_repository.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-db_from_env = dj_database_url.config(conn_max_age=600)
+#db_from_env = dj_database_url.config(conn_max_age=600)
 
-'''
+
 DATABASES = {
       'default': dj_database_url.config(
           default='sqlite:////{0}'.format(os.path.join(BASE_DIR, 'db.sqlite3'))
@@ -90,10 +90,12 @@ DATABASES = {
 '''
 DATABASES = {
 'default': {
+    'NAME': 'postgresql',
     'ENGINE': 'django.db.backends.postgresql',
+    'USER' : 'postgresql',
     }
-}
-DATABASES['default'].update(db_from_env)
+}'''
+#DATABASES['default'].update(db_from_env)
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
