@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'image_repository.wsgi.application'
 
 db_from_env = dj_database_url.config(conn_max_age=600)
 
-'''
+
 DATABASES = {
       'default': dj_database_url.config(
           default='sqlite:////{0}'.format(os.path.join(BASE_DIR, 'db.sqlite3'))
@@ -94,7 +94,7 @@ DATABASES = {
     'ENGINE': 'django.db.backends.postgresql',
     'USER' : 'postgresql',
     }
-}
+}'''
 DATABASES['default'].update(db_from_env)
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
